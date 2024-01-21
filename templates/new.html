@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My App</title>
+</head>
+<body>
+    <h1 style="text-align: center">Linear Regression Model</h1>
+    <hr style="color:rgb(0,0,0);">
+    <h2 sttle="color: rgb(0,0,0);">Provide inputs below</h2>
+
+    <form action="{{url_for('predict')}}" method = "post">
+        <textarea name="text1" cols="100" rows="15" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+        <br>
+        <textarea name="text2" cols="100" rows="15" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+        <br>
+
+        <button type="submit">Get Score</button><br><br>
+        <b style="color: rgb(0,0,0); font-size: 22px;">{{statement}}</b>        
+
+    </form>
+
+  
+</body>
+</html>
