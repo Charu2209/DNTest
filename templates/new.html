@@ -6,18 +6,61 @@
     <title>My App</title>
 </head>
 <body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select the form element
+            const form = document.getElementById('predict');
+
+            // Add a submit event listener to the form
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                document.getElementById('score').innerText = "";
+
+
+                // Get form data
+                const formData = {
+                    text1: document.getElementById('text1').value,
+                    text2: document.getElementById('text2').value
+                };
+
+                // Convert form data to JSON
+                const jsonData = JSON.stringify(formData);
+
+                // Make a POST request using Fetch API
+                fetch('/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: jsonData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response data
+                    document.getElementById('score').innerText = JSON.stringify(data);
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
     <h1 style="text-align: center">Linear Regression Model</h1>
     <hr style="color:rgb(0,0,0);">
     <h2 sttle="color: rgb(0,0,0);">Provide inputs below</h2>
 
-    <form action="{{url_for('predict')}}" method = "post">
-        <textarea name="text1" cols="100" rows="15" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+    <form id="predict" action="/" method = "post">
+        <textarea id="text1" name="text1" cols="100" rows="15" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
         <br>
-        <textarea name="text2" cols="100" rows="15" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+        <textarea id="text2" name="text2" cols="100" rows="15" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
         <br>
 
         <button type="submit">Get Score</button><br><br>
-        <b style="color: rgb(0,0,0); font-size: 22px;">{{statement}}</b>        
+        <!-- <b style="color: rgb(0,0,0); font-size: 22px;">{{statement}}</b>   -->
+        <b style="color: rgb(0,0,0); font-size: 22px;" id="score" ></b>  
 
     </form>
 
